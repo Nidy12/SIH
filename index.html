@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MindfulMe: Your Mental Health Companion</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="mindfulme.css">    
+        
+    </head>
+    <body>
+        <div class="image-container">
+            <img src="./assets/mindfulmebg.jpeg" alt="Background Image">
+            <div class="overlay"></div>
+            <div class="navbar">
+                <ul>
+                    <a href="#"><li>HOME</li></a>
+                    <a href="#about"><li>ABOUT US</li></a>
+                    <a href="contact.html"><li>CONTACT US</li></a>
+                    <a href="register.html"><li>REGISTER</li></a>
+                </ul>
+            </div>
+        </div>
+        <h1 class="header">MindfulMe: Your Mental Health Companion</h1>
+    
+        <div class="button-container">
+            <div class="button-group">
+                <a href="#">
+                    <div class="button">
+                        <img src="./assets/image1.png" alt="Image 1">
+                        <h3 style="color: #000000;">Dashboard</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="button-group">
+                <a href="#">
+                    <div class="button">
+                        <img src="./assets/image2.png" alt="Image 2">
+                        <h3 style="color: #000000;">Chatbot</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="button-group">
+                <a href="#">
+                    <div class="button">
+                        <img src="./assets/image3.png" alt="Image 3">
+                        <h3 style="color: #000000;">Cognitive Behavioral Therapy(CBT)</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    
+        <div class="about-us" id="about">
+             <div class="left">
+                <h2>About Us</h2>
+                <p>Welcome to MindfulMe, a compassionate and supportive online platform dedicated to promoting mental health and well-being. We understand that mental health is an essential aspect of overall wellness, and we are here to provide guidance, resources, and a safe space for individuals seeking help and understanding.</p>
+            </div>
+            <div class="right">
+                <h2>Our Mission</h2>
+                <p>At MindfulMe, our mission is to break the stigma surrounding mental health and create a nurturing community where people can find the support they need. We believe that everyone deserves access to quality mental health care, and we are committed to making it more accessible through education, awareness, and advocacy.</p>
+            </div>
+            <div class="left">
+                <h2>Our Vision</h2>
+                <p>We envision a world where mental health is prioritized, understood, and discussed openly without fear of judgment. Our goal is to empower individuals to take control of their mental health journey and provide them with the tools to live fulfilling lives.</p>
+            </div>
+            <div class="right">
+                <h2>Our Commitment to Privacy</h2>
+                <p>We understand that privacy is crucial when discussing personal mental health issues. Rest assured, your privacy is our priority. We have strict policies in place to protect your confidentiality, and we are committed to providing a secure and judgment-free environment.</p>
+            </div>
+        </div>
+    
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="quick-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="try.html">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-info">
+                    <h4>Contact Information</h4>
+                    <p>Address: 123 Main Street, City, Country</p>
+                    <p>Email: info@mindfulme.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            const navbar = document.querySelector('.navbar');
+            // Get the h1 element
+            const h1 = document.getElementById('centered');
+            
+            // Add a scroll event listener
+            window.addEventListener('scroll', () => {
+                // Calculate the scroll position
+                const scrollY = window.scrollY || window.pageYOffset;
+    
+                // Set the transparency of the navbar based on scroll position
+                if (scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    h1.style.marginTop = "80px"; // Add space below the navbar
+                } else {
+                    navbar.classList.remove('scrolled');
+                    h1.style.marginTop = "0"; // Reset margin when scrolling back to the top
+                }
+            });
+        </script>
+    </body>
+    </html>
+    

@@ -1,53 +1,54 @@
-/* Reset default margin and padding for the body */
 body {
     margin: 0;
     padding: 0;
-    background-color: #2c1f4a;
+    background-color: #ffffff;
+    font-family: 'Lexend Deca', sans-serif;
+    overflow-x: hidden;
+}
+a {
+    text-decoration: none;
 }
 
-/* Style the header */
 .header {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    font-family: 'Lexend Deca', sans-serif;
     color: white;
+    padding: 30px;
+    text-align: center;
     font-size: 32px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 80%;
-    z-index: 2; /* Place the header on top of the image and overlay */
+    z-index: 2;
+    margin-top: 20rem;
 }
 
-/* Create a container for the background image with a grey overlay */
 .image-container {
     position: relative;
-    overflow: hidden; /* Hide overflowing card-container */
+    overflow: hidden;
 }
 
 .image-container img {
     width: 100%;
     height: auto;
-    position: sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
-/* Grey overlay on top of the image */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(31, 31, 31, 0.5); /* Adjust the last value (0.5) for transparency */
+    background-color: rgba(0, 0, 0, 0.705); 
+    z-index: 2;
 }
 
-/* Create a transparent navigation bar */
 .navbar {
-    position: absolute;
+    background: transparent;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -55,64 +56,175 @@ body {
     z-index: 1;
 }
 
-/* Style the navbar links (aligned to the right) */
 .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: flex-end;
-}
-
-.navbar li {
-    margin-right: 20px;
-    font-family: 'Lexend Deca', sans-serif;
-    cursor: pointer;
-    color: white;
-    list-style: none;
-    font-weight: bold;
-    padding: 1rem;
-    font-size: 20px;
-    transition: 0.5s;
-}
-
-.navbar a {
     text-decoration: none;
 }
 
+.navbar li {
+    margin-right: 10px;
+    font-family: 'Lexend Deca', sans-serif;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
 .navbar li:hover {
-    background-color: white;
+    background-color: #FFFFFF;
     color: black;
 }
 
+.navbar.transparent {
+    background-color: transparent;
+    transition: background-color 0.5s;
+}
 
-.card-container {
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 0.5s;
+}
+
+.button-container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    /* box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5);  */
-    position: absolute;
-    bottom: 18rem;
-    left: 0;
-    width: 100%;
-    /* background: rgba(0, 0, 0, 0.5);  */
+    max-width: 100%;
+    margin-top: 5rem;
+    flex-wrap: wrap; /* Allow the buttons to wrap to the next line */
 }
 
-/* Style the individual cards */
-.card {
-    flex: 0 0 calc(20% - 20px); /* Adjust width as needed */
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5); /* Black box shadow with 0.5rem offset */
+.button-group {
+    flex: 1;
+    background-color: rgba(255, 255, 255,0.8);
     text-align: center;
-    margin-right: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; Adjust alignment to the top */
+    justify-content: center;
+    padding: 20px; 
+    margin: 1rem; /* Add space between the buttons */
+    max-width: calc(33.33% - 20px); /* Ensure the buttons fit in three columns */
+    color: #000000;
 }
 
-.card h2 {
-    font-size: 24px;
+.button-group img {
+    max-width: 80%;
+    max-height: 80%;
+    height: 250px;
+    margin: 1rem;
 }
 
-.card p {
+.button-group:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* About Us section */
+.about-us {
+    background-color: transparent; /* Remove the white box */
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.about-us h2,
+.about-us h3 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.about-us p {
+    font-size: 18px;
+    color: #000000;
+    line-height: 1.6;
+    background-color: rgba(255, 255, 255, 0.694); /* Add translucent background to paragraphs */
+    padding: 10px; /* Adjust the padding as needed */
+    border-radius: 10px; /* Add rounded corners */
+}
+
+/* Alternate layout for headers and information */
+.about-us .left {
+    order: 1;
+    text-align: left;
+}
+
+.about-us .right {
+    order: 2;
+    text-align: right;
+}
+
+.about-us .left h2,
+.about-us .right h2 {
+    font-size: 36px;
+}
+
+.about-us .left p,
+.about-us .right p {
     font-size: 16px;
-    color: black; /* Change text color if needed */
+}
+
+/* Footer styles */
+.footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.quick-links {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.quick-links h4 {
+    font-size: 20px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links li {
+    margin-bottom: 8px;
+}
+
+.quick-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.footer-info {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.footer-info h4 {
+    font-size: 20px;
+}
+
+.footer-info p {
+    font-size: 15px;
+    margin-bottom: 10px;
 }
