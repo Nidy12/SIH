@@ -48,8 +48,11 @@
         input[type="text"],
         input[type="email"],
         input[type="password"],
+        input[type="specialty"],
         input[type="phone"],
-        input[type="guardian"] {
+        input[type="date"],
+        input[type="number"],
+        input[type="radio"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #a7a7a7;
@@ -72,13 +75,96 @@
             background-color: rgba(0, 0, 0, 0.8);
             color: #ffffff;
         }
+
+        .toggle-buttons {
+            text-align: center;
+            /* margin-top: 20px; */
+        }
+
+        .toggle-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 20px;
+            font-family: 'Lexend Deca';
+            transition: all 0.3s; /* Added a transition for smooth animation */
+        }
+
+        .toggle-buttons button:hover {
+            background-color: white;
+            padding: 0.5rem;
+            color: #000000;
+        }
+
+        .active {
+            color: #000000;
+        }
+
+        .divider {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            display: inline-block;
+            width: 30%;
+            margin: 0 10px 0 0;
+            border-top: 1px solid #ffffff;
+        }
+
+        .registration-options {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+
+        /* Animation styles */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; display: none; }
+            to { opacity: 1; display: block; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; display: block; }
+            to { opacity: 0; display: none; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 class="form-title">Register</h2>
-        <form action="register.php" method="post" onsubmit="return validateForm();">
-            <!-- Input fields for name, email, password, and confirm password -->
+        <div class="registration-options">
+            <div class="toggle-buttons">
+                <button id="userToggle" class="active">User</button>
+                <button id="healthcareToggle">Healthcare Worker</button>
+            </div>
+        </div>
+
+        <!-- User Registration Form -->
+        <form id="userRegistrationForm" action="user_register.php" method="post" class="fade-in">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -97,60 +183,109 @@
             </div>
             <div class="form-group">
                 <label for="phone">Phone number:</label>
-                <input type="text" id="phno" name="phone" required>
+                <input type="phone" id="phone" name="phone" required>
             </div>
             <div class="form-group">
-                <label for="guardian">Guardian number:</label>
-                <input type="text" id="gno" name="guardian" required>
+                <label for="emergency-phone">Emergency Phone number:</label>
+                <input type="phone" id="emergency-phone" name="emergency-phone" required>
             </div>
-            <center><button type="submit" class="submit-btn" style="font-family: 'Lexend Deca';">Register</button></center>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group radio-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="userGender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="userGender" value="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="userGender" value="other">
+                <label for="other">Other</label>
+                <input type="radio" id="prefer-not-to-say" name="userGender" value="prefer-not-to-say">
+                <label for="prefer-not-to-say">Prefer Not to Say</label>
+            </div>
+            <center><button type="submit" class="submit-btn" style="font-family: 'Lexend Deca';">Register as User</button></center>
         </form>
-        <p style="text-align: center; margin-top: 10px;">Already have an account? <a href="./signin.html" style="color: white;">Sign in here</a></p>
+
+        <!-- Healthcare Registration Form -->
+        <form id="healthcareRegistrationForm" action="healthcare_register.php" method="post" style="display: none;" class="fade-out">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for "email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number:</label>
+                <input type="phone" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="specialty">Specialty:</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="psychiatrist">Psychiatrist</option>
+                    <option value="psychologist">Psychologist</option>
+                    <option value="therapist">Therapist</option>
+                    <option value="counselor">Counselor</option>
+                    <option value="social-worker">Social Worker</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="experience">Years of Experience:</label>
+                <input type="number" id="experience" name="experience" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group radio-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="healthcareGender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="healthcareGender" value="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="healthcareGender" value="other">
+                <label for="other">Other</label>
+                <input type="radio" id="prefer-not-to-say" name="healthcareGender" value="prefer-not-to-say">
+                <label for="prefer-not-to-say">Prefer Not to Say</label>
+            </div>
+            <center><button type="submit" class="submit-btn" style="font-family: 'Lexend Deca';">Register as Healthcare Worker</button></center>
+        </form>
     </div>
     <script>
-        function validateForm() {
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirm-password").value;
-            var phone = document.getElementById("phno").value;
-            var guardian = document.getElementById("gno").value;
+        const userForm = document.getElementById("userRegistrationForm");
+        const healthcareForm = document.getElementById("healthcareRegistrationForm");
 
-            // Regular expression to validate email format
-            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        document.getElementById("userToggle").addEventListener("click", function () {
+            userForm.style.display = "block";
+            healthcareForm.style.display = "none";
+            userForm.classList.remove("fade-out");
+            userForm.classList.add("fade-in");
+            healthcareForm.classList.remove("fade-in");
+            healthcareForm.classList.add("fade-out");
+            document.getElementById("userToggle").classList.add("active");
+            document.getElementById("healthcareToggle").classList.remove("active");
+        });
 
-            // Validate if the password and confirm password match
-            if (password !== confirmPassword) {
-                alert("Password and Confirm Password must match.");
-                return false;
-            }
-
-            // Regular expression to validate phone number format
-            var phonePattern = /^\d{10}$/;
-
-            // Regular expression to validate guardian number format
-            var guardianPattern = /^\d{10}$/;
-
-            if (name === "" || !email.match(emailPattern) || password === "" || phone === "" || guardian === "") {
-                alert("Please fill out all fields correctly.");
-                return false;
-            }
-
-            if (!phone.match(phonePattern)) {
-                alert("Please enter a valid phone number (10 digits).");
-                return false;
-            }
-
-            if (!guardian.match(guardianPattern)) {
-                alert("Please enter a valid guardian number (10 digits).");
-                return false;
-            }
-
-            return true;
-        }
-        function redirectToSignIn() {
-            window.location.href = 'signin.html';
-        }
+        document.getElementById("healthcareToggle").addEventListener("click", function () {
+            userForm.style.display = "none";
+            healthcareForm.style.display = "block";
+            userForm.classList.remove("fade-in");
+            userForm.classList.add("fade-out");
+            healthcareForm.classList.remove("fade-out");
+            healthcareForm.classList.add("fade-in");
+            document.getElementById("userToggle").classList.remove("active");
+            document.getElementById("healthcareToggle").classList.add("active");
+        });
     </script>
 </body>
 </html>
