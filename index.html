@@ -5,22 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindfulMe: Your Mental Health Companion</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="mindfulme.css">
     <style>
-        /* Reset default margin and padding for the body */
+        /* Common styles for all screen sizes */
         body {
             margin: 0;
             padding: 0;
+            background-color: #ffffff;
+            font-family: 'Lexend Deca', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Set a background image with overlay */
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            color: rgb(0, 0, 0);
+            padding: 30px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 2;
+            margin-top: 20rem;
+        }
+
         .image-container {
             position: relative;
+            overflow: hidden;
         }
 
         .image-container img {
             width: 100%;
             height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         .overlay {
@@ -29,206 +52,261 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.705);
+            z-index: 2;
         }
 
-        /* Navigation bar styles */
-        .navbar {
-            background: rgba(0, 0, 0, 0.8);
-            transition: 0.5s;
-            position: fixed;
-            width: 100%;
-            text-align: center;
-            z-index: 1;
+        /* Mobile-specific styles */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 3;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .bar {
+                width: 30px;
+                height: 4px;
+                background-color: white;
+                margin: 3px 0;
+                transition: 0.4s;
+            }
+
+            .navbar ul {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                background-color: rgba(0, 0, 0, 0.8);
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .navbar.active ul {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .navbar li {
+                margin: 10px 0;
+                font-size: 24px;
+                text-align: right;
+            }
+
+            /* Smaller buttons for mobile */
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                max-width: 100%;
+                margin-top: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .button-group {
+                flex: 1;
+                background-color: rgba(255, 255, 255, 0.8);
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.3s, box-shadow 0.3s;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 10px;
+                margin: 1rem;
+                max-width: calc(50% - 20px); /* Two buttons per row */
+                color: #000000;
+            }
+
+            .button-group img {
+                max-width: 80%;
+                max-height: 80%;
+                height: auto;
+                margin: 1rem;
+            }
+
+            .button-group h3 {
+                font-size: 16px; /* Smaller font size */
+                margin: 10px 0;
+            }
         }
 
-        .navbar ul {
-            text-align: center;
-            padding: 0;
-        }
-
-        .navbar li {
-            display: block;
-            margin: 10px 0;
-        }
-
-        .navbar li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Header styles */
-        .header {
-            text-align: center;
-            margin-top: 80px;
-            font-size: 28px;
-            color: rgb(0, 0, 0);
-        }
-
-        /* Button container styles */
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Center buttons on the screen */
-            padding: 20px;
-        }
-
-        .button-group {
-            flex: 1;
-            text-align: center;
-            margin: 10px;
-        }
-
-        .button {
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
-            color: #000000;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .button h3 {
-            font-size: 18px;
-        }
-
-        /* About us styles */
+        /* About Us styles */
         .about-us {
-            padding: 20px;
-            color: #000000;
+            background-color: transparent;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
         }
 
-        .about-us h2 {
-            font-size: 16px;
-            color: #4f4f4f;
+        .about-us h2,
+        .about-us h3 {
+            font-size: 28px;
+            color: #5b5b5b;
+            margin-bottom: 10px;
         }
 
         .about-us p {
-            font-size: 16px;
+            font-size: 18px;
+            color: #000000;
+            line-height: 1.6;
+            background-color: rgba(255, 255, 255, 0.694);
+            padding: 10px;
+            border-radius: 10px;
         }
 
         /* Footer styles */
         .footer {
-            background: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
             padding: 20px 0;
-            color: rgb(255, 255, 255);
-            text-align: center;
         }
 
         .footer-content {
             display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 0 auto;
             flex-wrap: wrap;
-            justify-content: space-around;
-            text-align: left;
         }
 
-        .quick-links, .footer-info {
+        .quick-links {
             flex: 1;
-            margin: 10px;
+            padding: 0 15px;
         }
 
-        @media screen and (max-width: 768px) {
-            /* Adjust the button layout for smaller screens */
-            .button-group {
-                flex: 0 0 50%; /* Each button takes full width on a new line */
-            }
+        .quick-links h4 {
+            font-size: 20px;
+        }
+
+        .quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quick-links li {
+            margin-bottom: 8px;
+        }
+
+        .quick-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .footer-info {
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .footer-info h4 {
+            font-size: 20px;
+        }
+
+        .footer-info p {
+            font-size: 15px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="image-container">
-        <div class="overlay"></div>
-        <div class="navbar">
+<div class="menu-toggle" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+<div class="image-container">
+    <div class="overlay"></div>
+    <div class="navbar">
+        <ul id="menuList">
+            <a href="#"><li>HOME</li></a>
+            <a href="#about"><li>ABOUT US</li></a>
+            <a href="contact.html"><li>CONTACT US</li></a>
+            <a href="register.html"><li>REGISTER</li></a>
+        </ul>
+    </div>
+</div>
+<h1 class="header">MindfulMe: Your Mental Health Companion</h1>
+
+<div class="button-container">
+    <div class="button-group">
+        <a href="#">
+            <div class="button">
+                <img src="./assets/image1.png" alt="Image 1">
+                <h3 style="color: #000000;">Dashboard</h3>
+            </div>
+        </a>
+    </div>
+    <div class="button-group">
+        <a href="#">
+            <div class="button">
+                <img src="./assets/image2.png" alt="Image 2">
+                <h3 style="color: #000000;">Chatbot</h3>
+            </div>
+        </a>
+    </div>
+    <div class="button-group">
+        <a href="#">
+            <div class="button">
+                <img src="./assets/image3.png" alt="Image 3">
+                <h3 style="color: #000000;">Cognitive Behavioral Therapy(CBT)</h3>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="about-us" id="about">
+    <div class="left">
+        <h2>About Us</h2>
+        <p>Welcome to MindfulMe, a compassionate and supportive online platform dedicated to promoting mental health and well-being. We understand that mental health is an essential aspect of overall wellness, and we are here to provide guidance, resources, and a safe space for individuals seeking help and understanding.</p>
+    </div>
+    <div class="right">
+        <h2>Our Mission</h2>
+        <p>At MindfulMe, our mission is to break the stigma surrounding mental health and create a nurturing community where people can find the support they need. We believe that everyone deserves access to quality mental health care, and we are committed to making it more accessible through education, awareness, and advocacy.</p>
+    </div>
+    <div class="left">
+        <h2>Our Vision</h2>
+        <p>We envision a world where mental health is prioritized, understood, and discussed openly without fear of judgment. Our goal is to empower individuals to take control of their mental health journey and provide them with the tools to live fulfilling lives.</p>
+    </div>
+    <div class="right">
+        <h2>Our Commitment to Privacy</h2>
+        <p>We understand that privacy is crucial when discussing personal mental health issues. Rest assured, your privacy is our priority. We have strict policies in place to protect your confidentiality, and we are committed to providing a secure and judgment-free environment.</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="quick-links">
+            <h4>Quick Links</h4>
             <ul>
-                <a href="#"><li>HOME</li></a>
-                <a href="#about"><li>ABOUT US</li></a>
-                <a href="contact.html"><li>CONTACT US</li></a>
-                <a href="register.html"><li>REGISTER</li></a>
+                <li><a href="try.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </div>
-    </div>
-    <h1 class="header">MindfulMe: Your Mental Health Companion</h1>
-
-    <div class="button-container">
-        <div class="button-group">
-            <a href="#">
-                <div class="button">
-                    <img src="./assets/image1.png" alt="Image 1">
-                    <h3 style="color: #000000;">Dashboard</h3>
-                </div>
-            </a>
-        </div>
-        <div class="button-group">
-            <a href="#">
-                <div class="button">
-                    <img src="./assets/image2.png" alt="Image 2">
-                    <h3 style="color: #000000;">Chatbot</h3>
-                </div>
-            </a>
-        </div>
-        <div class="button-group">
-            <a href="#">
-                <div class="button">
-                    <img src="./assets/image3.png" alt="Image 3">
-                    <h3 style="color: #000000;">Cognitive Behavioral Therapy (CBT)</h3>
-                </div>
-            </a>
+        <div class="footer-info">
+            <h4>Contact Information</h4>
+            <p>Address: 123 Main Street, City, Country</p>
+            <p>Email: info@mindfulme.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
         </div>
     </div>
+</footer>
 
-    <div class="about-us" id="about">
-        <div class="left">
-            <h2>About Us</h2>
-            <p>Welcome to MindfulMe, a compassionate and supportive online platform dedicated to promoting mental health and well-being. We understand that mental health is an essential aspect of overall wellness, and we are here to provide guidance, resources, and a safe space for individuals seeking help and understanding.</p>
-        </div>
-        <div class="right">
-            <h2>Our Mission</h2>
-            <p>At MindfulMe, our mission is to break the stigma surrounding mental health and create a nurturing community where people can find the support they need. We believe that everyone deserves access to quality mental health care, and we are committed to making it more accessible through education, awareness, and advocacy.</p>
-        </div>
-        <div class="left">
-            <h2>Our Vision</h2>
-            <p>We envision a world where mental health is prioritized, understood, and discussed openly without fear of judgment. Our goal is to empower individuals to take control of their mental health journey and provide them with the tools to live fulfilling lives.</p>
-        </div>
-        <div class="right">
-            <h2>Our Commitment to Privacy</h2>
-            <p>We understand that privacy is crucial when discussing personal mental health issues. Rest assured, your privacy is our priority. We have strict policies in place to protect your confidentiality, and we are committed to providing a secure and judgment-free environment.</p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="quick-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="try.html">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-info">
-                <h4>Contact Information</h4>
-                <p>Address: 123 Main Street, City, Country</p>
-                <p>Email: info@mindfulme.com</p>
-                <p>Phone: +1 (123) 456-7890</p>
-            </div>
-        </div>
-    </footer>
-    <script>
-        const navbar = document.querySelector('.navbar');
-        const h1 = document.querySelector('.header');
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY || window.pageYOffset;
-
-            if (scrollY > 50) {
-                navbar.classList.add('scrolled');
-                h1.style.marginTop = "80px";
-            } else {
-                navbar.classList.remove('scrolled');
-                h1.style.marginTop = "0";
-            }
-        });
-    </script>
+<script>
+    function toggleMenu() {
+        var menuList = document.getElementById("menuList");
+        menuList.classList.toggle("active");
+    }
+</script>
 </body>
 </html>
