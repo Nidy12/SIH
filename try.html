@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulMe: Your Mental Health Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default margin and padding for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Lexend Deca', sans-serif;
+            overflow-x: hidden; /* Hide horizontal overflow */
+        }
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 2;
+            margin-top: 20rem;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(31, 31, 31, 0.5); /* Adjust overlay background color and transparency */
+            z-index: 1; /* Ensure the overlay is above the image */
+        }
+
+        .navbar {
+            background: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+            text-decoration: none;
+        }
+
+        .navbar li {
+            margin-right: 10px;
+            font-family: 'Lexend Deca', sans-serif;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            padding: 1rem;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .navbar li:hover {
+            background-color: #FFFFFF;
+            color: black;
+        }
+
+        .navbar.transparent {
+            background-color: transparent;
+            transition: background-color 0.5s;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: 0.5s;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 100%;
+            margin-top:5rem;
+            flex-wrap: wrap; /* Allow the buttons to wrap to the next line */
+        }
+
+        .button-group {
+            flex: 1;
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Adjust alignment to the top */
+            justify-content: center;
+            padding: 20px; 
+            margin: 1rem; /* Add space between the buttons */
+            max-width: calc(33.33% - 20px); /* Ensure the buttons fit in three columns */
+        }
+
+        .button-group img {
+            max-width: 80%;
+            max-height: 80%;
+            margin: 1rem;
+        }
+
+        .button-group:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* About Us section */
+        .about-us {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: 0.5s;
+        }
+
+        .about-us h2,
+        .about-us h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .about-us p {
+            font-size: 18px;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* Alternate layout for headers and information */
+        .about-us .left {
+            order: 1;
+            text-align: left;
+        }
+
+        .about-us .right {
+            order: 2;
+            text-align: right;
+        }
+
+        .about-us .left h2,
+        .about-us .right h2 {
+            font-size: 36px;
+        }
+
+        .about-us .left p,
+        .about-us .right p {
+            font-size: 16px;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #2c1f4a;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .quick-links {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .quick-links h4 {
+            font-size: 24px;
+        }
+
+        .quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quick-links li {
+            margin-bottom: 10px;
+        }
+
+        .quick-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .footer-info {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .footer-info h4 {
+            font-size: 24px;
+        }
+
+        .footer-info p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="./assets/mindfulmebg.jpg" alt="Background Image">
+        <div class="overlay"></div>
+        <div class="navbar">
+            <ul>
+                <a href="#"><li>HOME</li></a>
+                <a href="#about"><li>ABOUT US</li></a>
+                <a href="contact.html"><li>CONTACT US</li></a>
+            </ul>
+        </div>
+    </div>
+    <h1 class="header">MindfulMe: Your Mental Health Companion</h1>
+
+    <div class="button-container">
+        <div class="button-group">
+            <a href="#">
+                <div class="button">
+                    <img src="./assets/image1.png" alt="Image 1">
+                    <h3>Dashboard</h3>
+                </div>
+            </a>
+        </div>
+        <div class="button-group">
+            <a href="#">
+                <div class="button">
+                    <img src="./assets/image2.png" alt="Image 2">
+                    <h3>Chatbot</h3>
+                </div>
+            </a>
+        </div>
+        <div class="button-group">
+            <a href="#">
+                <div class="button">
+                    <img src="./assets/image3.png" alt="Image 3">
+                    <h3>Cognitive Behavioral Therapy(CBT)</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="about-us" id="about">
+         <div class="left">
+            <h2>About Us</h2>
+            <p>Welcome to MindfulMe, a compassionate and supportive online platform dedicated to promoting mental health and well-being. We understand that mental health is an essential aspect of overall wellness, and we are here to provide guidance, resources, and a safe space for individuals seeking help and understanding.</p>
+        </div>
+        <div class="right">
+            <h2>Our Mission</h2>
+            <p>At [Your Website Name], our mission is to break the stigma surrounding mental health and create a nurturing community where people can find the support they need. We believe that everyone deserves access to quality mental health care, and we are committed to making it more accessible through education, awareness, and advocacy.</p>
+        </div>
+        <div class="left">
+            <h2>Our Vision</h2>
+            <p>We envision a world where mental health is prioritized, understood, and discussed openly without fear of judgment. Our goal is to empower individuals to take control of their mental health journey and provide them with the tools to live fulfilling lives.</p>
+        </div>
+        <div class="right">
+            <h2>Our Commitment to Privacy</h2>
+            <p>We understand that privacy is crucial when discussing personal mental health issues. Rest assured, your privacy is our priority. We have strict policies in place to protect your confidentiality, and we are committed to providing a secure and judgment-free environment.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-info">
+                <h4>Contact Information</h4>
+                <p>Address: 123 Main Street, City, Country</p>
+                <p>Email: info@mindfulme.com</p>
+                <p>Phone: +1 (123) 456-7890</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const navbar = document.querySelector('.navbar');
+        // Get the h1 element
+        const h1 = document.getElementById('centered');
+        
+        // Add a scroll event listener
+        window.addEventListener('scroll', () => {
+            // Calculate the scroll position
+            const scrollY = window.scrollY || window.pageYOffset;
+
+            // Set the transparency of the navbar based on scroll position
+            if (scrollY > 50) {
+                navbar.classList.add('scrolled');
+                h1.style.marginTop = "80px"; // Add space below the navbar
+            } else {
+                navbar.classList.remove('scrolled');
+                h1.style.marginTop = "0"; // Reset margin when scrolling back to the top
+            }
+        });
+    </script>
+</body>
+</html>
