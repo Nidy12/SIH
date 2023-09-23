@@ -228,3 +228,55 @@ a {
     font-size: 15px;
     margin-bottom: 10px;
 }
+
+/* Media queries for mobile */
+@media screen and (max-width: 768px) {
+    .header {
+        font-size: 20px;
+        margin-top: 5rem;
+    }
+
+    .navbar {
+        padding: 5px 0;
+    }
+
+    .navbar li {
+        font-size: 14px;
+        padding: 0.3rem;
+    }
+
+    .button-group {
+        max-width: 100%;
+        margin: 1rem 0;
+    }
+
+    .button-group img {
+        max-width: 60%;
+        max-height: 60%;
+        margin: 1rem;
+    }
+
+    .button-group h3 {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .about-us h2,
+    .about-us h3 {
+        font-size: 16px;
+    }
+
+    .about-us p {
+        font-size: 14px;
+    }
+
+    .footer-content {
+        justify-content: center;
+    }
+
+    .quick-links,
+    .footer-info {
+        flex: 1;
+        padding: 0 5px;
+    }
+}
