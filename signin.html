@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - MindfulMe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default margin and padding for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Add your background image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-image: url('./assets/mindfulmebg.png'); /* Add your background image URL */
+            font-family: 'Lexend Deca', sans-serif;
+            color: #ffffff;
+        }
+
+        /* Additional styles specific to the sign-in page */
+        /* You can customize these styles as needed */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            /* background-color: rgba(255, 255, 255, 0.8); Semi-transparent white background */
+            border-radius: 5px;
+            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+        }
+
+        .form-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: Lexend Deca;
+        }
+
+        .submit-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="form-title">Sign In</h2>
+        <form action="try.html" method="post" id="signInForm"> <!-- Replace "try.html" with your desired redirection URL -->
+            <!-- Input fields for email and password -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <center><button type="submit" class="submit-btn">Sign In</button></center>
+        </form>
+        <p style="text-align: center; margin-top: 10px;">Don't have an account? <a href="register.html" style="color: white; ">Register here</a></p>
+    </div>
+    <script>
+        // Redirect to "try.html" on form submission
+        document.getElementById("signInForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            window.location.href = "try.html"; // Redirect to "try.html"
+        });
+    </script>
+</body>
+</html>

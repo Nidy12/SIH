@@ -12,15 +12,16 @@
             padding: 0;
             background-color: #f4f4f4;
             font-family: 'Lexend Deca', sans-serif;
+            background-image: url("./assets/mindfulmebg.png");
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .container {
             max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         /* Form styling */
@@ -32,7 +33,7 @@
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            color: #333; /* Match the color scheme */
+            color: #ffffff; /* Match the color scheme */
         }
 
         input[type="text"],
@@ -52,42 +53,69 @@
 
         /* Submit button */
         .submit-btn {
-            background-color: #007BFF;
-            color: white;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: rgb(0, 0, 0);
             border: none;
             padding: 10px 20px;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
+            font-family: Lexend Deca;
         }
 
         .submit-btn:hover {
-            background-color: #0056b3;
+            background-color: #000000;
+            color: rgb(255, 255, 255);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2 style="color: #333;">Contact Us</h2>
-        <form action="submit.php" method="post"> <!-- Replace "submit.php" with your form submission script -->
+        <h2 style="color: #ffffff;">Contact Us</h2>
+        <form action="try.html" method="post" onsubmit="return validateForm();">
             <div class="form-group">
-                <label for="name" style="color: #333;">Name:</label>
+                <label for="name" style="color: #ffffff;">Name:</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email" style="color: #333;">Email:</label>
+                <label for="email" style="color: #ffffff;">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="phone" style="color: #333;">Phone Number:</label>
+                <label for="phone" style="color: #ffffff;">Phone Number:</label>
                 <input type="tel" id="phone" name="phone" required>
             </div>
             <div class="form-group">
-                <label for="query" style="color: #333;">Your Query:</label>
+                <label for="query" style="color: #ffffff;">Your Query:</label>
                 <textarea id="query" name="query" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Submit</button>
+            <div style="display: flex; justify-content: space-between;">
+                <center><button type="submit" class="submit-btn">Submit</button></center>
+            </div>
         </form>
+        <div><a href="./try.html" style="text-decoration: none; color: white;"><button class="submit-btn">Return to Home Page</button></a></div>
     </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var query = document.getElementById("query").value;
+            
+            // Regular expression to validate email format
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+            // Regular expression to validate phone number format (10 digits)
+            var phonePattern = /^\d{10}$/;
+
+            if (name === "" || !email.match(emailPattern) || !phone.match(phonePattern) || query === "") {
+                alert("Please fill out all fields correctly.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>
