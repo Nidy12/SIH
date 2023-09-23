@@ -15,15 +15,15 @@
 
         .header {
             color: rgb(0, 0, 0);
-            padding: 30px;
+            padding: 2rem;
             text-align: center;
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             z-index: 2;
             margin-top: 20rem;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
         }
 
         /* Set a background image with overlay */
@@ -35,38 +35,31 @@
             width: 100%;
             height: auto;
         }
-/* 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-        } */
 
-        /* Navigation bar styles */
+        .hamburger-menu {
+            display: none;
+        }
+
+        .hamburger-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            
+        }
+
         .navbar {
-            /* background: rgba(218, 201, 201, 0); */
+            display: block;
             transition: 0.5s;
             position: fixed;
             width: 100%;
             text-align: center;
             z-index: 1;
             transition: 0.5s;
-            
-        }
-        
-        /* Add a class for the scrolled state */
-        .navbar.scrolled {
-            background: rgba(0, 0, 0, 0.5);
-            color: white; /* Change to translucent black when scrolled */
         }
 
         .navbar ul {
             text-align: center;
             padding: 0;
-            /* color: #000000; */
         }
 
         .navbar li {
@@ -76,17 +69,14 @@
         }
 
         .navbar li a {
-            /* color: rgb(0, 0, 0); */
             text-decoration: none;
         }
 
-        
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
 
-
-        /* Header styles */
-
-
-        /* Button container styles */
         .button-container {
             display: flex;
             flex-wrap: wrap;
@@ -101,7 +91,7 @@
         }
 
         .button {
-            background-color: #ffffff;
+            background-color: #75757556;
             border-radius: 10px;
             padding: 20px;
             color: #000000;
@@ -118,28 +108,28 @@
         }
 
         .button h3 {
-            font-size: 18px;
+            font-size: 1rem;
         }
 
         /* About us styles */
         .about-us {
-            padding: 20px;
+            padding: 2rem;
             color: #000000;
         }
 
         .about-us h2 {
-            font-size: 16px;
+            font-size: 1rem;
             color: #4f4f4f;
         }
 
         .about-us p {
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         /* Footer styles */
         .footer {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem 0;
             color: rgb(255, 255, 255);
             text-align: center;
         }
@@ -153,11 +143,57 @@
 
         .quick-links, .footer-info {
             flex: 1;
-            margin: 10px;
+            margin: 1rem;
         }
 
         @media screen and (max-width: 768px) {
-            /* Adjust the button layout for smaller screens */
+            .navbar {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: block;
+                text-align: right;
+            }
+
+            .hamburger-icon {
+                display: block;
+                color: white;
+                font-size: 30px;
+                padding: 1rem;
+            }
+
+            .hamburger-links {
+                display: none;
+                list-style: none;
+                padding: 0;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 5px;
+                padding: 1rem;
+            }
+
+            .hamburger-links.show {
+                display: block;
+            }
+
+            .hamburger-links li {
+                margin: 2rem 1rem;
+
+            }
+
+            .hamburger-links a:hover {
+                color: black;
+                background-color: white;
+            }
+
+            .hamburger-links a {
+                color: white;
+                text-decoration: none;
+            }
+
             .button-group {
                 flex: 0 0 50%; /* Each button takes full width on a new line */
             }
@@ -165,17 +201,26 @@
     </style>
 </head>
 <body>
-        <div class="image-container"><img src="./assets/mindfulmebg.jpeg" alt=""></div>
-        <div class="navbar">
-            <ul>
-                <a href="#"><li>HOME</li></a>
-                <a href="#about"><li>ABOUT US</li></a>
-                <a href="contact.html"><li>CONTACT US</li></a>
-                <a href="register.html"><li>REGISTER</li></a>
-            </ul>
-        </div>
+    <div class="image-container"><img src="./assets/mindfulmebg.jpeg" alt=""></div>
+    <div class="navbar">
+        <ul>
+            <a href="#"><li>HOME</li></a>
+            <a href="#about"><li>ABOUT US</li></a>
+            <a href="contact.html"><li>CONTACT US</li></a>
+            <a href="register.html"><li>REGISTER</li></a>
+        </ul>
+    </div>
+    <div class="hamburger-menu">
+        <span class="hamburger-icon" onclick="toggleHamburgerMenu()">&#9776;</span>
+        <ul class="hamburger-links">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+            <li><a href="register.html">REGISTER</a></li>
+        </ul>
+    </div>
 
-    <div><h1 class="header">MindfulMe: Your Mental Health Companion</h1></div>
+    <h1 class="header">MindfulMe: Your Mental Health Companion</h1>
 
     <div class="button-container">
         <div class="button-group">
@@ -242,21 +287,24 @@
             </div>
         </div>
     </footer>
+
     <script>
         const navbar = document.querySelector('.navbar');
-        const h1 = document.querySelector('.header');
+        const hamburgerLinks = document.querySelector('.hamburger-links');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY || window.pageYOffset;
 
             if (scrollY > 50) {
                 navbar.classList.add('scrolled');
-                
             } else {
                 navbar.classList.remove('scrolled');
-                
             }
         });
+
+        function toggleHamburgerMenu() {
+            hamburgerLinks.classList.toggle('show');
+        }
     </script>
 </body>
 </html>
